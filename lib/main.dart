@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   runApp(const MyApp());
 }
 
@@ -33,17 +37,13 @@ class _MyHomePageState extends State<MyHomePage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    const Text(
-      'Home',
-    ),
-    const Text(
-      'Search',
-    ),
+    HomePage(),
+    ExplorePage(),
     const Text(
       'Post',
     ),
     const Text(
-      'Activity',
+      'Event',
     ),
     const Text(
       'Profile',
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('images/search.png')),
               activeIcon: ImageIcon(AssetImage('images/search_active.png')),
-              label: 'Search',
+              label: 'Explore',
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('images/post.png')),
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('images/event.png')),
               activeIcon: ImageIcon(AssetImage('images/event_active.png')),
-              label: 'Activity',
+              label: 'Event',
             ),
             BottomNavigationBarItem(
               icon: CircleAvatar(
@@ -132,4 +132,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+Widget HomePage() {
+  return const Text("Add in Home Page stuff here");
+}
+
+Widget ExplorePage() {
+  return const Text("Add in Explore Page stuff here");
 }
