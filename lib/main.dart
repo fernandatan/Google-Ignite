@@ -63,22 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
       home: Scaffold(
         appBar: AppBar(
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Image.asset('images/camera.png', height: 35),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                    child: Image.asset(
-                      'images/title.png',
-                      fit: BoxFit.cover,
-                      height: 40,
-                    ),
-                  ),
-                ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset('images/banner.png', height: 55),
               ),
-              Image.asset('images/message.png', height: 35),
             ],
           ),
           backgroundColor: Colors.white,
@@ -104,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Post',
             ),
             BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage('images/heart.png')),
-              activeIcon: ImageIcon(AssetImage('images/heart_active.png')),
+              icon: ImageIcon(AssetImage('images/event.png')),
+              activeIcon: ImageIcon(AssetImage('images/event_active.png')),
               label: 'Activity',
             ),
             BottomNavigationBarItem(
