@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:io';
+import 'dart:ui';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -135,7 +137,126 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Widget HomePage() {
-  return const Text("Add in Home Page stuff here");
+  return SingleChildScrollView(
+    child: Column(
+      children: <Widget>[
+        Post(1, 'mariaballik', '1d',
+            'Friendship is born at that moment when one person says to another, ‘What! You too? I thought I was the only one.'),
+        Post(2, 'lisaevergreen', '1d',
+            "Landscapes of Cappadocia are on of Turkey's most popular natural wonders. ⛰🎈🇹🇷"),
+      ],
+    ),
+  );
+}
+
+Widget Post(numOfUser, name, date, postText) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8.0),
+    child: Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundImage:
+                        AssetImage('images/instagrammer$numOfUser.png'),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      name,
+                      style: TextStyle(
+                        fontFamily:
+                            Platform.isAndroid ? 'Roboto' : 'Neue Helvetica',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(date,
+                        style: TextStyle(
+                          fontFamily:
+                              Platform.isAndroid ? 'Roboto' : 'Neue Helvetica',
+                        )),
+                  ],
+                )
+              ],
+            ),
+            Image.asset(
+              'images/more.png',
+              width: 40,
+            )
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
+          child: Container(
+            width: window.physicalSize.width,
+            child: RichText(
+                text: TextSpan(
+                    text: postText,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16))),
+          ),
+        ),
+        Image.asset('images/instagrammer' + numOfUser.toString() + '_post.png'),
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 15.0, right: 15.0, top: 10.0, bottom: 6.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('images/heart.png', width: 30),
+              RichText(
+                  text: const TextSpan(
+                      text: "Like (10)",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16))),
+              // Container(height: 40, child: const VerticalDivider(color: Colors.grey)),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Image.asset('images/comment.png', width: 30),
+              ),
+              RichText(
+                  text: const TextSpan(
+                      text: "Comment (5)",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16))),
+              // Container(height: 40, child: const VerticalDivider(color: Colors.grey)),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Image.asset('images/message.png', width: 30),
+              ),
+              RichText(
+                  text: const TextSpan(
+                      text: "Share (5)",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16))),
+            ],
+          ),
+        ),
+        Container(
+            height: 15,
+            child: const Divider(color: Color(0xFFEEEEEE), thickness: 5)),
+      ],
+    ),
+  );
 }
 
 Widget ExplorePage() {
