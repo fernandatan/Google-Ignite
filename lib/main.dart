@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:ui';
+import 'package:readmore/readmore.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -140,10 +141,10 @@ Widget HomePage() {
   return SingleChildScrollView(
     child: Column(
       children: <Widget>[
-        Post(1, 'mariaballik', '1d',
-            'Friendship is born at that moment when one person says to another, ‘What! You too? I thought I was the only one.'),
-        Post(2, 'lisaevergreen', '1d',
-            "Landscapes of Cappadocia are on of Turkey's most popular natural wonders. ⛰🎈🇹🇷"),
+        Post(1, 'fernandatan', '1d',
+            'Took part in Shopee Product and Design Challenge 2021 as part of Team Ah Ballin and ended off our journey as Semi-Finalist! it was an enriching experience and we will like to extend our gratitude to our mentor Vivian for her help and guidance along the way.'),
+        Post(2, 'nigelng', '1d',
+            "Today marks the final day of my internship with UBS in its headquarters, Zurich, Switzerland. It has been an eventful journey thus far, journeying to a foreign country and collaborating with like-minded individuals. It has not been an easy adventure with steep learning curves and challenging projects. Nevertheless, I have only great things to say about my journey with my amazing team. I would like to thank George, Floyd, Lina, Steve and Ayden for your continuous support for my growth and patience for my learning. I will thoroughly miss working with all of you and I hope that our paths will cross again some time in the near future. "),
       ],
     ),
   );
@@ -164,7 +165,7 @@ Widget Post(numOfUser, name, date, postText) {
                   child: CircleAvatar(
                     radius: 20,
                     backgroundImage:
-                        AssetImage('images/instagrammer$numOfUser.png'),
+                        AssetImage('images/other_profile_$numOfUser.png'),
                   ),
                 ),
                 Column(
@@ -198,17 +199,26 @@ Widget Post(numOfUser, name, date, postText) {
           padding: const EdgeInsets.only(
               left: 8.0, right: 8.0, top: 8.0, bottom: 8.0),
           child: Container(
-            width: window.physicalSize.width,
-            child: RichText(
-                text: TextSpan(
-                    text: postText,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16))),
-          ),
+              width: window.physicalSize.width,
+              child: ReadMoreText(
+                postText,
+                trimLines: 2,
+                colorClickableText: Colors.grey,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: 'Show more',
+                trimExpandedText: 'Show less',
+                style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16),
+                moreStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16),
+              )
+            ),
         ),
-        Image.asset('images/instagrammer' + numOfUser.toString() + '_post.png'),
+        Image.asset('images/post_' + numOfUser.toString() + '.png'),
         Padding(
           padding: const EdgeInsets.only(
               left: 15.0, right: 15.0, top: 10.0, bottom: 6.0),
