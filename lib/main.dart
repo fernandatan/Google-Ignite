@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:ui';
 import 'package:readmore/readmore.dart';
+import 'explore_page.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -208,15 +209,14 @@ Widget Post(numOfUser, name, date, postText) {
                 trimCollapsedText: 'Show more',
                 trimExpandedText: 'Show less',
                 style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16),
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16),
                 moreStyle: const TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.normal,
                     fontSize: 16),
-              )
-            ),
+              )),
         ),
         Image.asset('images/post_' + numOfUser.toString() + '.png'),
         Padding(
@@ -269,6 +269,6 @@ Widget Post(numOfUser, name, date, postText) {
   );
 }
 
-Widget ExplorePage() {
-  return const Text("Add in Explore Page stuff here");
-}
+// Widget ExplorePage() {
+//   return const Text("Add in Explore Page stuff here");
+// }
