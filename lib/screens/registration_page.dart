@@ -14,22 +14,44 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final List<FocusNode> _focusNodes = [
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+  ];
   // final _auth = FirebaseAuth.instance;
 
   // our form key
   final _formKey = GlobalKey<FormState>();
   // editing Controller
   final firstNameEditingController = TextEditingController();
-  final secondNameEditingController = TextEditingController();
+  final lastNameEditingController = TextEditingController();
+  final usernameEditingController = TextEditingController();
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final confirmPasswordEditingController = TextEditingController();
 
   @override
+  void initState() {
+    for (var node in _focusNodes) {
+      node.addListener(() {
+        setState(() {});
+      });
+    }
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     //first name field
     final firstNameField = TextFormField(
+        focusNode: _focusNodes[0],
         autofocus: false,
+        cursorColor: const Color(0XFF642714),
         controller: firstNameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
@@ -47,40 +69,81 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.account_circle),
+          prefixIcon: Icon(Icons.account_circle, color: _focusNodes[0].hasFocus ? const Color(0XFF642714): Colors.grey),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "First Name",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
+          ),
         ));
 
-    //second name field
-    final secondNameField = TextFormField(
+    //last name field
+    final lastNameField = TextFormField(
+        focusNode: _focusNodes[1],
         autofocus: false,
-        controller: secondNameEditingController,
+        cursorColor: const Color(0XFF642714),
+        controller: lastNameEditingController,
         keyboardType: TextInputType.name,
         validator: (value) {
           if (value!.isEmpty) {
-            return ("Second Name cannot be Empty");
+            return ("Last Name cannot be Empty");
           }
           return null;
         },
         onSaved: (value) {
-          secondNameEditingController.text = value!;
+          lastNameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.account_circle),
+          prefixIcon: Icon(Icons.account_circle, color: _focusNodes[1].hasFocus ? const Color(0XFF642714): Colors.grey),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Second Name",
+          hintText: "Last Name",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
+          ),
+        ));
+
+    //username field
+    final usernameField = TextFormField(
+        focusNode: _focusNodes[2],
+        autofocus: false,
+        cursorColor: const Color(0XFF642714),
+        controller: usernameEditingController,
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Username cannot be Empty");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          usernameEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.account_circle, color: _focusNodes[2].hasFocus ? const Color(0XFF642714): Colors.grey),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Username",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
           ),
         ));
 
     //email field
     final emailField = TextFormField(
+        focusNode: _focusNodes[3],
         autofocus: false,
         controller: emailEditingController,
         keyboardType: TextInputType.emailAddress,
@@ -100,17 +163,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.mail),
+          prefixIcon: Icon(Icons.mail, color: _focusNodes[3].hasFocus ? const Color(0XFF642714): Colors.grey),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
+          ),
         ));
 
     //password field
     final passwordField = TextFormField(
+        focusNode: _focusNodes[4],
         autofocus: false,
+        cursorColor: const Color(0XFF642714),
         controller: passwordEditingController,
         obscureText: true,
         validator: (value) {
@@ -127,17 +196,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
+          prefixIcon: Icon(Icons.vpn_key, color: _focusNodes[4].hasFocus ? const Color(0XFF642714): Colors.grey),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
+          ),
         ));
 
     //confirm password field
     final confirmPasswordField = TextFormField(
+        focusNode: _focusNodes[5],
         autofocus: false,
+        cursorColor: const Color(0XFF642714),
         controller: confirmPasswordEditingController,
         obscureText: true,
         validator: (value) {
@@ -152,11 +227,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
+          prefixIcon: Icon(Icons.vpn_key, color: _focusNodes[5].hasFocus ? const Color(0XFF642714): Colors.grey),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Confirm Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
           ),
         ));
 
@@ -204,10 +283,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const <Widget>[
+                      Text("Sign Up", style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                        color: Color(0XFF642714)
+                      ))
+                    ]),
                     const SizedBox(height: 20),
                     firstNameField,
                     const SizedBox(height: 20),
-                    secondNameField,
+                    lastNameField,
+                    const SizedBox(height: 20),
+                    usernameField,
                     const SizedBox(height: 20),
                     emailField,
                     const SizedBox(height: 20),
@@ -220,7 +310,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Text("Already have an account?   "),
+                          const Text("Already have an account?  "),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -298,7 +388,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   //   userModel.email = user!.email;
   //   userModel.uid = user.uid;
   //   userModel.firstName = firstNameEditingController.text;
-  //   userModel.secondName = secondNameEditingController.text;
+  //   userModel.lastName = lastNameEditingController.text;
 
   //   await firebaseFirestore
   //       .collection("users")

@@ -14,10 +14,24 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   // form key
   final _formKey = GlobalKey<FormState>();
+  final List<FocusNode> _focusNodes = [
+    FocusNode(),
+    FocusNode(),
+  ];
 
   // editing controller
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    for (var node in _focusNodes) {
+      node.addListener(() {
+        setState(() {});
+      });
+    }
+    super.initState();
+  }
 
   // firebase
   // final _auth = FirebaseAuth.instance;
@@ -29,7 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     //email field
     final emailField = TextFormField(
+        focusNode: _focusNodes[0],
         autofocus: false,
+        cursorColor: const Color(0XFF642714),
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
@@ -48,17 +64,23 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.mail),
+          prefixIcon: Icon(Icons.mail, color: _focusNodes[0].hasFocus ? const Color(0XFF642714): Colors.grey),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
+          ),
         ));
 
     //password field
     final passwordField = TextFormField(
+        focusNode: _focusNodes[1],
         autofocus: false,
+        cursorColor: const Color(0XFF642714),
         controller: passwordController,
         obscureText: true,
         validator: (value) {
@@ -75,11 +97,15 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
+          prefixIcon: Icon(Icons.vpn_key, color: _focusNodes[1].hasFocus ? const Color(0XFF642714): Colors.grey),
           contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Color(0XFF642714)),
           ),
         ));
 
@@ -139,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Text("Don't have an account?   "),
+                          const Text("Don't have an account?  "),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(

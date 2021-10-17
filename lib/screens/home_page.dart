@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:ui';
 import 'package:readmore/readmore.dart';
+import 'explore_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -243,9 +244,4 @@ Widget Post(numOfUser, name, date, postText) {
       ],
     ),
   );
-}
-
-
-Widget ExplorePage() {
-  return const Text("Add in Explore Page stuff here");
 }
